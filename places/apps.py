@@ -1,6 +1,6 @@
 from django.apps import AppConfig
 
 
-class FishaMapConfig(AppConfig):
+class PlacesConfig(AppConfig):
     default_auto_field = 'django.db.models.BigAutoField'
-    name = 'fisha_map'
+    name = 'places'
