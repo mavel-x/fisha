@@ -11,3 +11,11 @@ class Place(models.Model):
     def __str__(self):
         return self.title
 
+
+class PlaceImage(models.Model):
+    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='место',
+                              related_name='images', related_query_name='image')
+    image = models.ImageField('картинка')
+
+    def __str__(self):
+        return f'{self.id}: {self.place.title}'
