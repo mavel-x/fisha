@@ -1,14 +1,18 @@
 from django.contrib import admin
+from adminsortable2.admin import SortableAdminBase, SortableTabularInline
 
 from .models import Place, PlaceImage
 
 
-class PlaceImageInline(admin.TabularInline):
+class PlaceImageInline(SortableTabularInline):
     model = PlaceImage
+    ordering = ['position']
+    readonly_fields = ["preview"]
+    fields = ('image', 'preview', 'position')
 
 
 @admin.register(Place)
-class PlaceAdmin(admin.ModelAdmin):
+class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
         PlaceImageInline
     ]
@@ -16,4 +20,5 @@ class PlaceAdmin(admin.ModelAdmin):
 
 @admin.register(PlaceImage)
 class PlaceImageAdmin(admin.ModelAdmin):
-    pass
+    readonly_fields = ["preview"]
+    fields = ('image', 'preview', 'position')
