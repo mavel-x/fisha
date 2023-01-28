@@ -7,6 +7,7 @@ from . import views
 
 urlpatterns = [
     path('admin/', admin.site.urls),
+    path('place/<int:place_id>/', views.place_details, name='place_details'),
     path('', views.index, name='index'),
 ]
 urlpatterns += static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
