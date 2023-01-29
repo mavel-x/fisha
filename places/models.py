@@ -10,7 +10,6 @@ class Place(models.Model):
     description_long = HTMLField('длинное описание')
     lat = models.FloatField('широта')
     lng = models.FloatField('долгота')
-    slug = models.SlugField('слаг', unique=True)
 
     def __str__(self):
         return self.title
