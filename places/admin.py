@@ -16,6 +16,7 @@ class PlaceAdmin(SortableAdminBase, admin.ModelAdmin):
     inlines = [
         PlaceImageInline
     ]
+    search_fields = ['title']
 
 
 @admin.register(PlaceImage)
