@@ -18,7 +18,10 @@ def index(request):
             "type": "Feature",
             "geometry": {
                 "type": "Point",
-                "coordinates": [place.lat, place.lng]
+                "coordinates": [
+                    place.lng,
+                    place.lat,
+                ]
             },
             "properties": {
                 "title": place.title,
