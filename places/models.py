@@ -5,9 +5,19 @@ from tinymce.models import HTMLField
 
 
 class Place(models.Model):
-    title = models.CharField('название', max_length=200, unique=True)
-    description_short = models.TextField('краткое описание')
-    description_long = HTMLField('длинное описание', null=True, blank=True)
+    title = models.CharField(
+        'название',
+        max_length=200,
+        unique=True
+    )
+    description_short = models.TextField(
+        'краткое описание',
+        blank=True,
+    )
+    description_long = HTMLField(
+        'длинное описание',
+        blank=True,
+    )
     lat = models.FloatField('широта')
     lng = models.FloatField('долгота')
 
@@ -16,10 +26,17 @@ class Place(models.Model):
 
 
 class PlaceImage(models.Model):
-    place = models.ForeignKey(Place, on_delete=models.CASCADE, verbose_name='место',
-                              related_name='images', related_query_name='image')
+    place = models.ForeignKey(
+        Place,
+        on_delete=models.CASCADE,
+        verbose_name='место',
+        related_name='images',
+    )
     image = models.ImageField('картинка')
-    position = models.PositiveIntegerField('порядковый номер', default=0, null=True, blank=True)
+    position = models.PositiveIntegerField(
+        'порядковый номер',
+        default=0
+    )
 
     class Meta:
         ordering = ['position']
@@ -28,8 +45,10 @@ class PlaceImage(models.Model):
         return f'{self.position}: {self.place.title}'
 
     def preview(self):
-        return format_html('<img src="{url}" height={height} />'.format(
-            url=self.image.url,
-            height=min(self.image.height, 200),
-        )
+        return format_html(
+            '<img src="{url}" height={height} />'
+            .format(
+                url=self.image.url,
+                height=min(self.image.height, 200),
+            )
         )
