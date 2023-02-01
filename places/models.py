@@ -1,5 +1,4 @@
 from django.db import models
-from django.utils.html import format_html
 
 from tinymce.models import HTMLField
 
@@ -43,12 +42,3 @@ class PlaceImage(models.Model):
 
     def __str__(self):
         return f'{self.position}: {self.place.title}'
-
-    def preview(self):
-        return format_html(
-            '<img src="{url}" height={height} />'
-            .format(
-                url=self.image.url,
-                height=min(self.image.height, 200),
-            )
-        )
