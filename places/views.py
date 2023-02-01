@@ -9,24 +9,24 @@ def index(request):
     places = Place.objects.all()
 
     feature_collection = {
-      "type": "FeatureCollection",
-      "features": []
+      'type': 'FeatureCollection',
+      'features': []
     }
 
     for place in places:
         feature_collection['features'].append({
-            "type": "Feature",
-            "geometry": {
-                "type": "Point",
-                "coordinates": [
+            'type': 'Feature',
+            'geometry': {
+                'type': 'Point',
+                'coordinates': [
                     place.lng,
                     place.lat,
                 ]
             },
-            "properties": {
-                "title": place.title,
-                "placeId": f'place_{place.id}',
-                "detailsUrl": reverse('place_details', args=[place.id])
+            'properties': {
+                'title': place.title,
+                'placeId': f'place_{place.id}',
+                'detailsUrl': reverse('place_details', args=[place.id])
             }
         })
 
@@ -37,13 +37,13 @@ def index(request):
 def place_details(request, place_id):
     place = get_object_or_404(Place, pk=place_id)
     response = {
-        "title": place.title,
-        "imgs": [image.image.url for image in place.images.all()],
-        "description_short": place.description_short,
-        "description_long": place.description_long,
-        "coordinates": {
-            "lng": place.lng,
-            "lat": place.lat,
+        'title': place.title,
+        'imgs': [image.image.url for image in place.images.all()],
+        'description_short': place.description_short,
+        'description_long': place.description_long,
+        'coordinates': {
+            'lng': place.lng,
+            'lat': place.lat,
         }
     }
     return JsonResponse(response)

@@ -25,7 +25,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.1/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = env.str('SECRET_KEY', 'replace_me')
+SECRET_KEY = env.str('SECRET_KEY')
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = env.bool('DEBUG', False)
@@ -84,13 +84,13 @@ WSGI_APPLICATION = 'fisha.wsgi.application'
 # https://docs.djangoproject.com/en/4.1/ref/settings/#databases
 
 DATABASES = {
-    "default": {
-        "ENGINE": env.str("SQL_ENGINE", "django.db.backends.sqlite3"),
-        "NAME": env.str("SQL_DATABASE", f'{BASE_DIR / "db.sqlite3"}'),
-        "USER": env.str("SQL_USER", "user"),
-        "PASSWORD": env.str("SQL_PASSWORD", "password"),
-        "HOST": env.str("SQL_HOST", "localhost"),
-        "PORT": env.str("SQL_PORT", "5432"),
+    'default': {
+        'ENGINE': env.str('SQL_ENGINE', 'django.db.backends.sqlite3'),
+        'NAME': env.str('SQL_DATABASE', f'{BASE_DIR / "db.sqlite3"}'),
+        'USER': env.str('SQL_USER', 'user'),
+        'PASSWORD': env.str('SQL_PASSWORD', 'password'),
+        'HOST': env.str('SQL_HOST', 'localhost'),
+        'PORT': env.str('SQL_PORT', '5432'),
     }
 }
 
@@ -130,6 +130,7 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.1/howto/static-files/
 
 STATIC_URL = 'static/'
+STATIC_ROOT = env.str('STATIC_ROOT', str(BASE_DIR / 'static'))
 
 MEDIA_ROOT = BASE_DIR / 'media'
 MEDIA_URL = 'media/'
