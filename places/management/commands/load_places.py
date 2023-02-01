@@ -10,11 +10,11 @@ from places.models import Place
 
 
 def load_place_to_db(place: dict):
-    new_place, created = Place.objects.get_or_create(
+    db_place, created = Place.objects.get_or_create(
         title=place['title'],
         defaults={
-            'description_short': place['description_short'],
-            'description_long': place['description_long'],
+            'description_short': place.get('description_short', ''),
+            'description_long': place.get('description_long', ''),
             'lat': place['coordinates']['lat'],
             'lng': place['coordinates']['lng'],
         }
@@ -27,7 +27,7 @@ def load_place_to_db(place: dict):
         response.raise_for_status()
         filename = Path(urlsplit(url).path).name
         image_file = ImageFile(file=BytesIO(response.content), name=filename)
-        new_place.images.create(image=image_file, position=position)
+        db_place.images.create(image=image_file, position=position)
 
 
 class Command(BaseCommand):
