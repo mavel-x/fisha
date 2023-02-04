@@ -13,11 +13,9 @@ class PlaceImageInline(SortableTabularInline):
 
     def preview(self, obj):
         return format_html(
-            '<img src="{url}" height={height} />'
-            .format(
-                url=obj.image.url,
-                height=min(obj.image.height, 200),
-            )
+            '<img src="{url}" height={height} />',
+            url=obj.image.url,
+            height=min(obj.image.height, 200),
         )
 
 
