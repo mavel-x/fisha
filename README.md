@@ -35,6 +35,4 @@ python manage.py runserver
 Обратите внимание на настройку статики и медиа.
 
 ## О проекте
-Это учебный проект для школы Python-разработчиков [dvmn.org](https://dvmn.org).
-
 Тестовые данные взяты с сайта [KudaGo](https://kudago.com).
